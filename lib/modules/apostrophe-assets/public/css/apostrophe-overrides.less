@@ -319,6 +319,16 @@ fieldset {
       border-color: @red;
     }
   }
+  .apos-button.apos-unsaved {
+    border-color: @red;
+  }
+  .apos-notification-container {
+    .apos-notification.apos-notification--success {
+      color: @black;
+      background-color: @white;
+      border-color: @red;
+    }
+  }
   .apos-workflow-locale-picker{
     .apos-workflow-locale-picker-items {
       li a:hover {
@@ -329,7 +339,36 @@ fieldset {
       }
     }
   }
+  .apos-workflow-export-locales {
+    .apos-workflow-locale-tree {
+      .apos-workflow-locale-tree {
+        border-left: 2px solid @red;
+      }
+      .apos-workflow-locale-checkbox-indicator {
+        height: 20px;
+        padding-left: 0;
+        pointer-events: none;
+      }
+      .apos-workflow-locale-control-label {
+        width: 12rem;
+        height: 30px;
+        display: inline-block;
+        cursor: pointer;
+        .apos-workflow-locale-label{
+          padding-left: 2rem;
+        }
+      }
+    }
+  }
 } // <-- end of apos-ui
+// Notification
+.apos-notification-container {
+  .apos-notification.apos-notification--success{
+    color: @black;
+    background-color: @white;
+    border-color: @red;
+  }
+}
 // cke editor
 .cke_inner {
   .box-shadow(none) !important;
@@ -343,7 +382,7 @@ fieldset {
   z-index: 999;
   transform: translate(-50%);
   li > a {
-    color: @black;
+    color: @black !important;
   }
   .btn.btn-large {
     color: white;
