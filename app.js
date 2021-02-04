@@ -131,7 +131,33 @@ var apos = require('apostrophe')({
       }]
       */
     },
-
+    // Apostrophe Workflow module
+    'apostrophe-workflow': {
+      locales: [
+        {
+          name: 'default',
+          label: 'Deutsch',
+          children: [
+            {
+              name: 'en-gb',
+              label: 'England'
+            },
+            {
+              name: 'fr',
+              label: 'Frankreich'
+            },
+            {
+              name: 'sp',
+              label: 'Spanien'
+            },
+          ]
+        },
+      ],
+      defaultLocale: 'de-de',
+      alias: 'workflow',
+      replicateAcrossLocales: false
+    },
+    'apostrophe-workflow-modified-documents': {},
     // Templates
     'apostrophe-templates': { viewsFolderFallback: path.join(__dirname, 'views') }
 

@@ -119,9 +119,6 @@ fieldset {
     background: inherit;
   }
 }
-.admin-bar li > a {
-  color: @black;
-}
 // Apos button
 .apos-ui {
   .apos-button:focus {
@@ -315,6 +312,28 @@ fieldset {
       color: @red;
     }
   }
+  //Workflow Overrides
+  .apos-workflow-menu {
+    .apos-button {
+      .box-shadow(none);
+      border-color: @red;
+    }
+  }
+  .apos-workflow-locale-picker{
+    .apos-workflow-locale-picker-items {
+      li a:hover {
+        color: @red;
+      }
+      .apos-workflow-locale-picker-items {
+        border-left: 2px solid @red;
+      }
+    }
+  }
+} // <-- end of apos-ui
+// cke editor
+.cke_inner {
+  .box-shadow(none) !important;
+  border-color: @red !important;
 }
 // Admin Bar
 .admin-bar {
@@ -323,8 +342,25 @@ fieldset {
   left: 50%;
   z-index: 999;
   transform: translate(-50%);
+  li > a {
+    color: @black;
+  }
   .btn.btn-large {
     color: white;
+  }
+  // Workflow
+  .apos-dropdown {
+    a {
+      display: none;
+    }
+    .apos-dropdown-item:nth-child(n+2){
+      display: none;
+    }
+    .apos-dropdown-item {
+      color: @black;
+      font-size: 16px;
+      padding: 14px 16px;
+    }
   }
 }
 .apos-ui .apos-admin-bar {
