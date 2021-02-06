@@ -1,7 +1,7 @@
 var path = require('path');
 
 var apos = require('apostrophe')({
-  shortName: 'material-cms',
+  shortName: 'material-cms-workflow',
   modules: {
     // Ordering Module for Pieces
     'apostrophe-pieces-orderings-bundle': {},
