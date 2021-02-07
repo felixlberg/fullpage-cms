@@ -153,6 +153,7 @@ var apos = require('apostrophe')({
           ]
         },
       ],
+      exportAfterCommit: false,
       defaultLocale: 'de-de',
       alias: 'workflow',
       replicateAcrossLocales: false
