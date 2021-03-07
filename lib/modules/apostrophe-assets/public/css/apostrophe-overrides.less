@@ -186,7 +186,8 @@ fieldset {
     // Two Column Schema Groups add here
     .apos-schema-group[data-apos-group="images"],
     .apos-schema-group[data-apos-group="colors"],
-    .apos-schema-group[data-apos-group="options"] {
+    .apos-schema-group[data-apos-group="options"],
+    .apos-schema-group[data-apos-group="special"] {
       .apos-schema-group-inner {
         .apos-field {
           width: 50%;
@@ -344,7 +345,7 @@ fieldset {
     }
   }
   .btn-admin {
-    z-index: 999;
+    z-index: 998;
     .insert {
       background-color: @purple;
     }
@@ -360,6 +361,16 @@ fieldset {
     .reorganize {
       background-color: @blue;
     }
+  }
+  //Admin Color Overrides
+  .flow-text {
+    color: @black;
+  }
+  .accent-color {
+    color: @black;
+  }
+  .apos-rich-text-widget > [data-rich-text]:focus {
+    outline: @black dashed 1px;
   }
 }// <-- end of apos-ui
 // Cke Editor
@@ -409,6 +420,10 @@ fieldset {
 }
 .sidenav-overlay {
   z-index: 7;
+}
+// Palette
+.apos-palette-container {
+  z-index: 999;
 }
 // Admin Widget UI
 /*

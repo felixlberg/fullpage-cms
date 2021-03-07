@@ -5,9 +5,6 @@ var apos = require('apostrophe')({
   modules: {
     // Ordering Module for Pieces
     'apostrophe-pieces-orderings-bundle': {},
-    'apostrophe-assets': {
-      lean: true
-    },
     // Custom Modules
     'card-widgets': {},
     'contact-form': {},
@@ -50,6 +47,7 @@ var apos = require('apostrophe')({
     'sections-widgets': {},
     'share-widgets':{},
     'slider-widgets':{},
+    'swiper-widgets':{},
     'tables': {
       orderings: true
     },
@@ -60,7 +58,6 @@ var apos = require('apostrophe')({
       orderings: true
     },
     'tables-widgets': {},
-    'tabs-widgets': {},
     'texts': {
       orderings: true
     },
@@ -117,6 +114,13 @@ var apos = require('apostrophe')({
         }
       }
     },
+    // Lean frontend
+    'apostrophe-assets': {
+      lean: true
+    },
+    'apostrophe-video-widgets': {
+      player: true
+    },
     // Serve Attacments over SSL only
     'apostrophe-attachments': {
       uploadfs: {
@@ -134,6 +138,22 @@ var apos = require('apostrophe')({
       }]
       */
     },
+    // Forms
+    'apostrophe-forms': {
+      disableBaseStyles: true,
+      optionLabelPosition: 'last'
+    },
+    'apostrophe-forms-widgets': {},
+    'apostrophe-forms-text-field-widgets': {},
+    'apostrophe-forms-textarea-field-widgets': {},
+    'apostrophe-forms-file-field-widgets': {},
+    'apostrophe-forms-select-field-widgets': {},
+    'apostrophe-forms-radio-field-widgets': {},
+    'apostrophe-forms-checkboxes-field-widgets': {},
+    'apostrophe-forms-boolean-field-widgets': {},
+    'apostrophe-forms-conditional-widgets': {},
+    // Templates
+    'apostrophe-templates': { viewsFolderFallback: path.join(__dirname, 'views') },
     // Apostrophe Workflow module
     'apostrophe-workflow': {
       locales: [
@@ -162,8 +182,6 @@ var apos = require('apostrophe')({
       replicateAcrossLocales: false
     },
     'apostrophe-workflow-modified-documents': {},
-    // Templates
-    'apostrophe-templates': { viewsFolderFallback: path.join(__dirname, 'views') }
 
   // << End of Modules
   }

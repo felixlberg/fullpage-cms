@@ -82,6 +82,11 @@
   .border-radius(top-right, @radius);
   .border-radius(bottom-right, @radius);
 }
+.box-shadow (@string) {
+  -webkit-box-shadow: @string;
+  -moz-box-shadow: @string;
+  box-shadow: @string;
+}
 .translate(@x, @y) {
 -webkit-transform: translate(@x, @y);
   -ms-transform: translate(@x, @y);
@@ -109,6 +114,9 @@ iframe {
   border: none;
 }
 // Typo
+h3 {
+  font-size: 1.64rem !important;
+}
 h4 {
   font-size: 1.64rem !important;
 }
@@ -320,21 +328,32 @@ h4 {
   background-color: inherit;
   margin: 0;
   .card-image {
+    max-height: 100vh;
     cursor: pointer;
     img {
+      width: 100%;
+      height: 100%;
       .object-fit(cover);
       visibility: visible;
     }
   }
+  @media (max-width: 600px) {
+    .card-image {
+      height: 50vh;
+    }
+  }
   .card-title {
-    pointer-events: none;
-    touch-action: none;
     width: 100%;
     h4 {
       line-height: 2rem;
     }
   }
   .card-content {
+    cursor: pointer;
+    p {
+      pointer-events: none;
+      touch-action: none;
+    }
     .apos-area-widget-wrapper {
       margin: 1.52rem 0 .912rem;
     }
@@ -367,15 +386,31 @@ h4 {
       }
     }
   }
+  .card-reveal {
+    width: 101%;
+    height: 101%;
+    background-color: inherit;
+    .material-icons.close {
+      position: absolute;
+      right: 25px;
+      top: 50px;
+      pointer-events: none;
+      touch-action: none;
+    }
+    h4 {
+      width: 90%;
+      margin: 0;
+      padding: 1.5rem 0;
+      pointer-events: none;
+      touch-action: none;
+    }
+  }
   .card-action {
     margin: 0;
     .row.widget {
       margin: 2rem 0;
       .radius {
         .border-radius(inherit);
-        .apos-slideshow-item {
-          min-height: inherit;
-        }
       }
     }
     a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
@@ -506,8 +541,6 @@ h4 {
     .apos-area,
     .apos-area-widget,
     .apos-area-widget-wrapper,
-    .apos-slideshow,
-    .apos-slideshow-item,
     .card,
     .col,
     .material-placeholder,
@@ -526,8 +559,6 @@ h4 {
       .apos-area,
       .apos-area-widget,
       .apos-area-widget-wrapper,
-      .apos-slideshow,
-      .apos-slideshow-item,
       .card,
       .col,
       .material-placeholder,
@@ -537,11 +568,6 @@ h4 {
         height: 50vh !important;
       }
     }
-  }
-  .apos-slideshow-item {
-    background-size: cover;
-    max-width: 100%;
-    min-height: 25rem;
   }
 }
 // Carousels
@@ -596,7 +622,11 @@ h4 {
   overflow: hidden;
   border-right: 0;
   border-left: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   .collapsible-header {
+    padding-left: 24px;
+    padding-right: 24px;
     background-color: inherit;
     border-bottom: inherit;
     a {
@@ -636,6 +666,13 @@ h4 {
     }
     h5 {
       font-size: 1.2rem;
+    }
+  }
+}
+.events {
+  .collapsible {
+    .collapsible-header:hover {
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -703,6 +740,10 @@ h4 {
             width: 100% !important;
             height: auto !important;
           }
+          span {
+            pointer-events: none;
+            touch-action: none;
+          }
         }
       }
     }
@@ -712,6 +753,9 @@ h4 {
       -webkit-column-count: 1 !important;
       -moz-column-count: 1 !important;
       column-count: 1 !important;
+      .images-container {
+        margin-bottom: 3rem;
+      }
     }
   }
   @media (min-width: 600px) {
@@ -800,7 +844,6 @@ table {
     }
   }
 }
-
 // Floating Action Button
 .fixed-action-btn {
   z-index: 99;
@@ -857,6 +900,7 @@ table {
       h2 {
         .translate(0, -160%);
         pointer-events: none;
+        touch-action: none;
         margin: 0;
       }
     }
@@ -871,6 +915,23 @@ table {
 @media (max-width: 600px) {
   .contact-form {
     margin-bottom: 10rem;
+  }
+}
+// Forms
+form {
+  button[type=submit] {
+    margin-top: 2rem;
+  }
+  .apos-forms-checkboxes--checkboxes{
+    span {
+      padding-right: 15px;
+    }
+  }
+  .apos-forms-checkboxes--dropdown {
+    button {
+      margin-bottom: 1rem;
+    }
+    border: none;
   }
 }
 // Footer
@@ -907,9 +968,37 @@ table {
     }
   }
 }
+// Infinite content
+.content {
+  .apos-ui {
+    .apos-pager {
+      height: 100%;
+      font-size: 18px;
+    }
+  }
+  .pagination {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 // Different Stuff
 .margin-top {
   margin-top: 1rem;
+}
+// Swiper Overrides
+.swiper-slide {
+  .radius {
+    .box-shadow(none);
+    border-radius: 0;
+  }
+  .widget {
+    margin: 0;
+  }
+  .card-action {
+    display: none;
+  }
 }
 // Admin UI Overrides
 .apos-ui {
