@@ -22,6 +22,14 @@
 
       </a>
 
+      <a class="accent-color sidenav-trigger" href="#" data-target="mobile"
+        {% if data.global.navTextColor %}
+          style="color: {{ data.global.navTextColor }}"
+        {% endif %}
+      >
+        <i class="material-icons">menu</i>
+      </a>
+
       {# Language Menu #}
       <div class="language-dropdown hide-on-med-and-down">
         <a class='dropdown-trigger' href='#' data-target='language-desktop'>
@@ -33,14 +41,6 @@
           {% endfor %}
         </ul>
       </div>
-
-      <a class="accent-color sidenav-trigger" href="#" data-target="mobile"
-        {% if data.global.navTextColor %}
-          style="color: {{ data.global.navTextColor }}"
-        {% endif %}
-      >
-        <i class="material-icons">menu</i>
-      </a>
 
       <ul class="nav-activator right hide-on-med-and-down">
 
