@@ -10,11 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Materialize tab widget
 - Add description text to text-show page when not blog
 - Add link color for palette and options for UPPERCASE text
-- Add prefix for galleries to not conflict with sections
-- Events header
-- Better arrows for swiper
-- Navigation background image and pushpin
-- Merge nav-default and nav-dopdown
+- Change nav title to page title
+- One section layout with endless glue widgets
+- Replace slider with swiper
+- Add prefixes to pieces to minimize naming conflicts
+- Fix shape divider bottom for slider
+- Fix TypeError: Cannot read property 'top' of undefined
+- Hide card-reaveal in swiper
 
 ## [0.9.7 ] - Unreleased
 
@@ -26,12 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Card reveal function
 - Gallery image click to link option
 - Infinite Scroll through external jquery plugin
-- Parallax background image for sections with optional shape dividers
-- Font color for text and Palette
-- Nav logo
-- Nav background image and pushpin
-- Section title
-- Passive event listeners for sidenav
+- Parallax background image for sections
+- Navigation bg image with gradient overlay and pushpin
+- Half height slider with gradient overlay, kenburns and extra content
+- Section headers
+- Updated dependencies
 
 ### Removed
 - Unnecessary javascript trough lean front end

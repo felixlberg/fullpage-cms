@@ -77,15 +77,18 @@
     <div class="widgets-container">
 
       {% if data.widget.header %}
-        <h1 class="section-header
+        <h1 class="section-header accent-color
           {% if data.widget.headerAlign == 'left' %}
             left-align
           {% elif data.widget.headerAlign == 'center' %}
             center-align
           {% elif data.widget.headerAlign == 'right' %}
             right-align
+          {% endif %}"
+          {% if data.widget.headerColor %}
+            style="color: {{ data.widget.headerColor }}"
           {% endif %}
-        ">
+          >
           {{ data.widget.header }}
         </h1>
       {% endif %}
@@ -141,11 +144,44 @@
       display: none
     }
   {% endif %}
-  {% if data.widget.gradientColorTop and data.widget.gradientColorBottom %}
+  {% if data.widget.gradientColorTop or data.widget.gradientColorBottom %}
     .gradient-overlay:after {
-      background: linear-gradient({{ data.widget.gradientColorTop }}80,{{ data.widget.gradientColorBottom }}80);
-      background: -webkit-linear-gradient({{ data.widget.gradientColorTop }}80, {{ data.widget.gradientColorBottom }}80);
-      background: -o-linear-gradient({{ data.widget.gradientColorTop }}80, {{ data.widget.gradientColorBottom }}80);
+      background: linear-gradient(
+        {% if data.widget.gradientColorTop %}
+          {{ data.widget.gradientColorTop }}
+        {% else %}
+          rgba(0, 0, 0, 0)
+        {% endif %},
+        {% if data.widget.gradientColorBottom %}
+          {{ data.widget.gradientColorBottom }}
+        {% else %}
+          rgba(0, 0, 0, 0)
+        {% endif %}
+      );
+      background: -o-linear-gradient(
+        {% if data.widget.gradientColorTop %}
+          {{ data.widget.gradientColorTop }}
+        {% else %}
+          rgba(0, 0, 0, 0)
+        {% endif %},
+        {% if data.widget.gradientColorBottom %}
+          {{ data.widget.gradientColorBottom }}
+        {% else %}
+          rgba(0, 0, 0, 0)
+        {% endif %}
+      );
+      background: -webkit-linear-gradient(
+        {% if data.widget.gradientColorTop %}
+          {{ data.widget.gradientColorTop }}
+        {% else %}
+          rgba(0, 0, 0, 0)
+        {% endif %},
+        {% if data.widget.gradientColorBottom %}
+          {{ data.widget.gradientColorBottom }}
+        {% else %}
+          rgba(0, 0, 0, 0)
+        {% endif %}
+      );
     }
   {% endif -%}
 </style>
