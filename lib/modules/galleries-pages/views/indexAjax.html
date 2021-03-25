@@ -5,9 +5,14 @@
     {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}
   </div>
 
+  <div class="">
+
+
+  </div>
+
   <div data-apos-ajax-append>
 
-    {# Include pieces.html #}
+    {# Include pieces.html from galleries-widget #}
     {% include "galleries-widgets:pieces.html" %}
 
   </div>

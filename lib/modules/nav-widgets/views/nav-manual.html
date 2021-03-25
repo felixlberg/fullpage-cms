@@ -1,3 +1,4 @@
+{% set pieces = data.page.s.items[0]._pieces or data.pieces %}
 <div class="nav">
 
   {# Nav Background #}
@@ -114,18 +115,6 @@
         <i class="material-icons">menu</i>
       </a>
 
-      {# Language Menu #}
-      <div class="language-dropdown hide-on-med-and-down">
-        <a class='dropdown-trigger' href='#' data-target='language-desktop'>
-          <i class="icon language"></i>
-        </a>
-        <ul id='language-desktop' class='dropdown-content'>
-          {% for localization in apos.workflow.localizations() %}
-            <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-
       <ul class="nav-activator right hide-on-med-and-down">
 
         {# Links Array Page #}
@@ -144,59 +133,76 @@
              </a>
            </li>
           {% endfor %}
+        {% elif data.global.links[0] %}
+          {% for name in data.global.links %}
+           <li>
+             <a href="{{ name.url }}" class="accent-color"
+               {% if data.global.navTextColor %}
+                 style="color: {{ data.global.navTextColor }}"
+               {% endif %}
+             >
+               {% if name.icon %}
+                  <i class="material-icons left">{{ name.icon }}</i>
+               {% endif %}
+               {{ name.name }}
+             </a>
+           </li>
+          {% endfor %}
         {% endif %}
 
-        {# Home Active #}
-        <li
-          {% if data.page._children[0] %}
-            class="active"
-          {% endif %}
-        >
-          <a href="{{ data.home._url }}" data-target="desktop-dropdown" class="accent-color flow-text"
-            {% if data.global.navTextColor %}
-              style="color: {{ data.global.navTextColor }}"
-            {% endif %}
-          >
-            {{ data.home.title }}
-          </a>
-        </li>
-
-        {# Home Cildren Active #}
-        {% for tab in data.home._children %}
-          <li
-            {% if data.page and (apos.pages.isAncestorOf(tab, data.page) or tab._id == data.page._id) %}
-              class="active"
-            {% endif %}
-          >
-            <a href="{{ tab._url }}" data-target="desktop-dropdown" class="accent-color flow-text"
-              {% if data.global.navTextColor %}
-                style="color: {{ data.global.navTextColor }}"
+        {# Main Links Array #}
+        {% if data.page.navArray[0] %}
+          {% for name in data.page.navArray %}
+            <li
+              {% if data.url == name.url %}
+                class="active"
               {% endif %}
             >
-              {{ tab.title }}
-            </a>
-          </li>
-        {% endfor %}
+              <a href="{{ name.url }}" data-target="{{ name.name }}" data-hover="true" class="accent-color flow-text
+                {% if name.navArrayDropdown %}
+                  dropdown-trigger-manual
+                {% endif %}"
+                {% if data.global.navTextColor %}
+                  style="color: {{ data.global.navTextColor }}"
+                {% endif %}
+              >
+                {{ name.name }}
+
+                <i class="material-icons left">arrow_drop_down</i>
+              </a>
+
+              {# Dropdown Links Array #}
+              {% if name.navArrayDropdown[0] %}
+                <ul class="dropdown-content" id="{{ name.name }}">
+                    {% for nameDropdown in name.navArrayDropdown %}
+                      <li>
+                        <a class="accent-color flow-text anchor-jump anchor-scroll truncate"
+                          href="
+                          {%- if data.url == name.url -%}
+                            {{ nameDropdown.url }}
+                          {%- else -%}
+                            {{ name.url }}{{ nameDropdown.url }}
+                          {%- endif -%}
+                          "
+                          {% if data.global.navTextColor %}
+                            style="color: {{ data.global.navTextColor }}"
+                          {% endif %}
+                        >
+                          {{ nameDropdown.nameDropdown }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            </li>
+          {% endfor %}
+        {% endif %}
 
       </ul>
 
     </div>
   </nav>
-
-  {# Dropdown Desktop #}
-  <ul class="dropdown-content" id="desktop-dropdown">
-    {% for section in pieces %}
-      <li>
-        <a href="#{{ section.slug }}" class="accent-color flow-text anchor-jump anchor-scroll truncate"
-          {% if data.global.navTextColor %}
-            style="color: {{ data.global.navTextColor }}"
-          {% endif %}
-        >
-          {{ section.title }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
 
 </div>
 
@@ -219,21 +225,6 @@
        </a>
      </li>
     {% endfor %}
-  {% elif data.global.links[0] %}
-    {% for name in data.global.links %}
-     <li>
-       <a href="{{ name.url }}" class="accent-color"
-         {% if data.global.navTextColor %}
-           style="color: {{ data.global.navTextColor }}"
-         {% endif %}
-       >
-         {% if name.icon %}
-            <i class="material-icons left">{{ name.icon }}</i>
-         {% endif %}
-         {{ name.name }}
-       </a>
-     </li>
-    {% endfor %}
   {% endif %}
 
   {# Home Active #}
@@ -242,12 +233,18 @@
       class="active"
     {% endif %}
   >
-    <a href="{{ data.home._url }}" data-target="mobile-dropdown" class="accent-color flow-text waves-effect waves-light"
+    <a href="{{ data.home._url }}" data-target="mobile-dropdown" class="accent-color flow-text waves-effect waves-light
+      {% if data.page._children[0] %}
+        dropdown-trigger
+      {% endif %}"
       {% if data.global.navTextColor %}
         style="color: {{ data.global.navTextColor }}"
       {% endif %}
       >
       {{ data.home.title }}
+      {% if data.page._children[0] %}
+        <i class="material-icons right">arrow_drop_down</i>
+      {% endif %}
     </a>
   </li>
 
@@ -258,26 +255,47 @@
         class="active"
       {% endif %}
     >
-      <a href="{{ tab._url }}" data-target="mobile-dropdown" class="accent-color flow-text waves-effect waves-light"
+      <a href="{{ tab._url }}" data-target="mobile-dropdown" class="accent-color flow-text waves-effect waves-light
+        {% if data.page and (apos.pages.isAncestorOf(tab, data.page) or tab._id == data.page._id) %}
+          dropdown-trigger
+        {% endif %}"
         {% if data.global.navTextColor %}
           style="color: {{ data.global.navTextColor }}"
         {% endif %}
       >
         {{ tab.title }}
+        {% if data.page and (apos.pages.isAncestorOf(tab, data.page) or tab._id == data.page._id) %}
+          <i class="material-icons right">arrow_drop_down</i>
+        {% endif %}
       </a>
     </li>
   {% endfor %}
 
-  {# Language Menu #}
-  <div class="language-dropdown mobile">
-    <a class='dropdown-trigger' href='#' data-target='language-mobile'>
-      <i class="icon language"></i>
-    </a>
-    <ul id='language-mobile' class='dropdown-content'>
-      {% for localization in apos.workflow.localizations() %}
-        <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
+  {# Dropdown Mobile #}
+  <ul class="dropdown-content" id="mobile-dropdown">
+    {% for section in data.pieces %}
+      <li>
+        <a href="#{{ section.slug }}" class="accent-color flow-text sidenav-close anchor"
+          {% if data.global.navTextColor %}
+            style="color: {{ data.global.navTextColor }}"
+          {% endif %}
+        >
+          {{ section.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 
 </ul>
+<script type="text/javascript">
+window.addEventListener('load', function () {
+  // Dropdown
+  var dropdowns = document.querySelectorAll('.dropdown-trigger-manual')
+  for (var i = 0; i < dropdowns.length; i++){
+    M.Dropdown.init(dropdowns[i], {
+      coverTrigger: false,
+      hover: true
+    });
+  }
+});
+</script>
