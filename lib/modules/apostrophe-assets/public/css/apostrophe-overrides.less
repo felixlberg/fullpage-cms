@@ -237,12 +237,6 @@ fieldset {
           box-shadow:0 1px 0 0 @red !important;
           filter: brightness(100%);
         }
-        input,
-        input + label,
-        textarea,
-        textarea + label {
-          margin-left: 0;
-        }
         input + label,
         textarea + label {
           color: #a9a9a9 !important;
@@ -251,9 +245,6 @@ fieldset {
         textarea:focus + label {
           color: @red !important;
           filter: brightness(100%)
-        }
-        i {
-          display: none;
         }
       }
       .apos-field-help {
@@ -430,6 +421,15 @@ fieldset {
       min-height: 130px;
       p {
         padding: 10px;
+      }
+    }
+  }
+  // Form Admin Overrides
+  .apos-schema-group[data-apos-group="form"] {
+    .apos-area-widget-wrapper {
+      min-height: 64px;
+      .btn {
+        padding: 0 16px;
       }
     }
   }
