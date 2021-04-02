@@ -55,6 +55,18 @@
           <i class="material-icons">menu</i>
         </a>
 
+        {# Language Menu #}
+        <div class="language-dropdown hide-on-med-and-down">
+          <a class='dropdown-trigger' href='#' data-target='language-desktop'>
+            <i class="icon language"></i>
+          </a>
+          <ul id='language-desktop' class='dropdown-content'>
+            {% for localization in apos.workflow.localizations() %}
+              <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
         <ul class="nav-activator right hide-on-med-and-down">
 
           {# Nav Items #}
