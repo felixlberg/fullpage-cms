@@ -276,6 +276,18 @@
     </li>
   {% endfor %}
 
+  {# Language Menu #}
+  <div class="language-dropdown mobile">
+    <a class='dropdown-trigger' href='#' data-target='language-mobile'>
+      <i class="icon language"></i>
+    </a>
+    <ul id='language-mobile' class='dropdown-content'>
+      {% for localization in apos.workflow.localizations() %}
+        <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
   {# Dropdown Mobile #}
   <ul class="dropdown-content" id="mobile-dropdown">
     {% for piece in pieces %}

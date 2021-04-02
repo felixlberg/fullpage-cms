@@ -15,11 +15,13 @@
       {% endif %}
     >
 
+      {# Pushpin #}
       <div class="nav-wrapper pin-top {% if data.widget.navShadow or data.global.navShadow %} z-depth-2{% endif %}"
         {% if data.widget._navBackgroundImage or data.global._navBackgroundImage %}
           style="position: relative"
         {% endif %}
       >
+
         {# Brand Logo #}
         <a class="brand-logo" href="{{ data.home._url }}">
           {% if data.widget._logo %}
@@ -55,7 +57,7 @@
           <i class="material-icons">menu</i>
         </a>
 
-        {# Language Menu #}
+        {# Language Menu Desktop #}
         <div class="language-dropdown hide-on-med-and-down">
           <a class='dropdown-trigger' href='#' data-target='language-desktop'>
             <i class="icon language"></i>
@@ -69,7 +71,7 @@
 
         <ul class="nav-activator right hide-on-med-and-down">
 
-          {# Nav Items #}
+          {# Nav Items Desktop #}
           {% for item in piece.linkArea.items %}
             <li
               {% if data.page._url == item._page._url %}
@@ -94,8 +96,8 @@
 
               </a>
 
+              {# Nav Item Subpages Dropdown Desktop #}
               {% if item._subpages %}
-                {# Dropdown Desktop #}
                 <ul class="dropdown-content" id="{{ item._id }}">
                     {% for subpage in item._subpages %}
                       <li>
@@ -125,7 +127,7 @@
   {# Mobile Sidenav #}
   <ul class="sidenav" id="mobile">
 
-    {# Links Array Page #}
+    {# Links Array Page Mobile #}
     {% if data.page.linksArray[0] %}
       {% for name in data.page.linksArray %}
        <li>
@@ -143,9 +145,7 @@
       {% endfor %}
     {% endif %}
 
-
-    {# Nav Items Mobile  #}
-
+    {# Nav Items Mobile #}
     {% for item in piece.linkArea.items %}
       <li
         {% if data.page._url == item._page._url %}
@@ -164,6 +164,7 @@
         </a>
       </li>
 
+      {# Nav Item Subpages Dropdown Mobile #}
       {% for subpage in item._subpages %}
         <li
           {% if data.page._url == subpage._url %}
@@ -181,6 +182,18 @@
       {% endfor %}
 
     {% endfor %}
+
+    {# Language Menu Mobile #}
+    <div class="language-dropdown mobile">
+      <a class='dropdown-trigger' href='#' data-target='language-mobile'>
+        <i class="icon language"></i>
+      </a>
+      <ul id='language-mobile' class='dropdown-content'>
+        {% for localization in apos.workflow.localizations() %}
+          <li><a href="{{ localization._url | build({ workflowLocale: localization.workflowLocale }) }}">{{ localization.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
 
   </ul>
 {% endfor %}
